@@ -65,16 +65,8 @@ final class NumberRenderer {
 		currentPoint = toPoint
 	}
 	
-	public func startUpdateWith(_ progress: CGFloat) {
-		startUpdateNumberWith(progress)
-		startUpdatePointWith(progress)
-	}
-	
-	public func startUpdateNumberWith(_ progress: CGFloat) {
+	public func update (with progress: CGFloat) {
 		currentNumber = fromNumber + (toNumber! - fromNumber) * progress
-	}
-	
-	public func startUpdatePointWith(_ progress: CGFloat) {
 		if let start = fromPoint, let end = toPoint {
 			let length = self.length(from: start, to: end)
 			let newLength = length * progress

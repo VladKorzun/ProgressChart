@@ -36,9 +36,9 @@ open class ProgressChart: UIView {
 	public func draw(animated: Bool, duration: TimeInterval?) {
 		canvas.chart = self
 		canvas.drawChart()
-//		if animated {
-//			canvas.animateWithDuration(duration: duration!)
-//		}
+		if animated {
+			canvas.animateWithDuration(duration: duration!)
+		}
 	}
 	
 	public func drawLinear(animated: Bool, duration: TimeInterval?) {

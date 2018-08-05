@@ -107,7 +107,7 @@ final class Canvas: CALayer {
 		shapeLayer.path = path
 		shapeLayer.fillColor = UIColor.clear.cgColor
 		shapeLayer.strokeColor = chart.progressBackgroundColor.cgColor
-		
+
 		let progressEnd = CGPoint(x: frame.width / chart.maxValue * chart.value, y: height / 2)
 		let progressPath = CGMutablePath()
 		progressPath.addLines(between: [start, progressEnd])
@@ -116,7 +116,7 @@ final class Canvas: CALayer {
 		progressCanvas?.lineWidth = height
 		progressCanvas?.path = progressPath
 		progressCanvas?.fillColor = UIColor.clear.cgColor
-		progressCanvas?.strokeColor = UIColor.red.cgColor
+		progressCanvas?.strokeColor = UIColor.blue.cgColor
 		
 		if !chart.progressGradientColor.isEmpty {
 			let layer = gradientLayer
@@ -165,8 +165,6 @@ final class Canvas: CALayer {
 	
 	private var numberRenderer = NumberRenderer()
 	private var displayLink: CADisplayLink?
-	private var lock: NSLock = NSLock()
-//	private var animators
 	
 	public func animateWithDuration(duration: TimeInterval) {
 		let strokeAnimation = CABasicAnimation(keyPath: "strokeEnd")
@@ -176,9 +174,6 @@ final class Canvas: CALayer {
 		strokeAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
 		progressCanvas?.add(strokeAnimation, forKey: "strokeAnimation")
 		startAnimation(with: duration)
-//		lock.lock()
-//
-//		displayLink?.invalidate()
 	}
 	
 	// MARK: Private methods
@@ -280,7 +275,7 @@ final class Canvas: CALayer {
 		}
 		
 		let percent = CGFloat(progress / maximumProgress)
-		numberRenderer.startUpdateWith(percent)
+		numberRenderer.update(with: percent)
 		self.setNeedsDisplay()
 	}
 	
